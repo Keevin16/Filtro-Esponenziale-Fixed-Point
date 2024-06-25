@@ -22,9 +22,9 @@ architecture behavior of MEMORY is
 begin
     process(CLOCK, RESET) begin
         if RESET = '1' then
-            Q <= (others => '0');
+            FF_D <= (others => '0');
         elsif rising_edge(CLOCK) then
-            FF_D <= Y;            
+            FF_D <= Y;     
         end if;
     end process;
     
