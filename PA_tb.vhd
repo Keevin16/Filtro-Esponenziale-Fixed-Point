@@ -40,9 +40,9 @@ begin
         wait for 10 ns;
         assert (S_TEST = "11110000111100001111000011110001") report "Test 3 failed" severity error;
 
-		  X_TEST <= "01011010110011111101100010010111";--1523570839
+		  X_TEST <= "01011010110011111101100010010111";
         wait for 10 ns;
-        assert (S_TEST = "01011010110011111101100010011000") report "Test 4 failed" severity error;--1523570840
+        assert (S_TEST = "01011010110011111101100010011000") report "Test 4 failed" severity error;
 
 
         wait;

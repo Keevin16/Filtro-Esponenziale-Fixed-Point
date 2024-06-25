@@ -8,9 +8,10 @@ entity TOP_LEVEL is
 	);
 	port(
 		X			: in  std_logic_vector (WIDTH-1 downto 0);
-		K			: in std_logic_vector (2 downto 0);
-		CLOCK		: in std_logic;
-		RESET		: in std_logic
+		K			: in 	std_logic_vector (2 downto 0);
+		Y			: out std_logic_vector (WIDTH-1 downto 0);
+		CLOCK		: in 	std_logic;
+		RESET		: in 	std_logic
    );
 end TOP_LEVEL;
 
@@ -76,4 +77,5 @@ begin
 			C  		=> COMMUNICATION_OUT2,
 			Z  		=> CSA_RESULT
 		);
+		Y	<= CSA_RESULT;
 end RCL;

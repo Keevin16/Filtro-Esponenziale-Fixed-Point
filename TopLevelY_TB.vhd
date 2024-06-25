@@ -1,6 +1,6 @@
---------------------------------------------------------------------------------
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+-------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
  
 ENTITY TopLevelY_TB IS
 END TopLevelY_TB;
