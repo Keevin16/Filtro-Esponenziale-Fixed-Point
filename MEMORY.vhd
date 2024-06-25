@@ -29,7 +29,7 @@ begin
     end process;
     
     FFs: for I in 0 to 31 generate
-        FLIP_FLOP_D_INSTANCE: FLIP_FLOP_D
+        FF_D_Instance: FLIP_FLOP_D
             port map(
                 D => FF_D(I),
                 CLOCK => CLOCK,
