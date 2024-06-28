@@ -59,26 +59,23 @@ begin
         Y <= "10000111011001010100001100100001";
         RESET <= '1';
         wait for CLOCK_period;
-        RESET <= '0';
         assert Q = "00000000000000000000000000000000" report "Test case 2 failed" severity error;
 
+		  RESET <= '0';
+		  wait for CLOCK_period;
+		  
         Y <= "10101010101110111100110011011101";
         wait for CLOCK_period;
         assert (Q = Y) report "Test case 3 failed" severity error;
 
         wait for CLOCK_period;
-        assert (Q = "10101010101110111100110011011101") report "Test case 4 failed" severity error;
+        assert (Q = "10101010101110111100110011011101") report "Test case 3 failed" severity error;
 
-        RESET <= '1';
-        wait for CLOCK_period;
-        RESET <= '0';
-        Y <= "10101010110110111100110011011101";
-        wait for CLOCK_period;
-        assert Q = "00000000000000000000000000000000" report "Test case 5 failed" severity error;
-        
-        wait for CLOCK_period;
-        assert (Q = x"11223344") report "Test case 5 continuation failed" severity error;
-
+		  Y <= "10101010101110111100110011011101";
+		  RESET <= '1';
+		  wait for CLOCK_period;
+		  wait for CLOCK_period;
+		  assert Q = "00000000000000000000000000000000" report "Test case 4 failed" severity error;
 		  
 		  wait;
     end process;

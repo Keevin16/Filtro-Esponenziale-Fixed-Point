@@ -69,12 +69,12 @@ begin
         wait for CLOCK_period;
         assert (Y_OUT2 = "00111011011100101110101001100010") report "Test case 2 failed" severity error;
 
-        --RESET <= '1';
-        --wait for CLOCK_period;
-      --  RESET <= '0';
-    --    wait for CLOCK_period;
-  --      wait for CLOCK_period;
---        assert Y_OUT1 =	"00000000000000000000000000000000" report "Test case 3 failed" severity error;
+        RESET <= '1';
+        wait for CLOCK_period;
+        RESET <= '0';
+        wait for CLOCK_period;
+        wait for CLOCK_period;
+        assert Y_OUT1 =	"00000000000000000000000000000000" report "Test case 3 failed" severity error;
 
         Y_RESULT <= "11110000111100001111000011110000";
 		  K <= "011";

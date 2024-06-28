@@ -17,10 +17,18 @@ entity TopLevelY is
 end TopLevelY;
 
 architecture RCL of TopLevelY is
-
+	signal COMMUNICATION_MUX	: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_MEM	: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_C2 	: std_logic_vector(WIDTH-1 downto 0);
-
+	
+	component MUX_2 is
+		port(
+		  X     : in std_logic_vector  (WIDTH-1 downto 0);
+		  Y	  : out std_logic_vector (WIDTH-1 downto 0);
+		  RESET : in std_logic
+		);
+	end component;
+	
 	component MEMORY is
 		port (
 			CLOCK, RESET : in std_logic;
@@ -44,12 +52,20 @@ architecture RCL of TopLevelY is
 		);
 	end component;
 	
-begin
+begin	
+
+	Mux2Istance: MUX_2
+		port map(
+			X			=>	Y_RESULT,
+			Y 			=> COMMUNICATION_MUX,
+			RESET		=> RESET
+		);
+		
 	MemoryIstance: MEMORY
 		port map(
 			CLOCK 	=> CLOCK,
 			RESET 	=>	RESET,
-			Y			=> Y_RESULT,
+			Y			=> COMMUNICATION_MUX,
 			Q			=>	COMMUNICATION_MEM
 		);
 		
@@ -66,6 +82,6 @@ begin
 			X			=>	COMMUNICATION_C2,
 			K			=>	K,
 			Y			=>	Y_OUT2
-		);
+		);		
 	
 end RCL;

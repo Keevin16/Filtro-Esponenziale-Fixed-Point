@@ -10,9 +10,7 @@ entity FLIP_FLOP_D is
 end FLIP_FLOP_D;
 
 architecture BEHAVIOR of FLIP_FLOP_D is begin
---    process(CLOCK) begin
---        if rising_edge(CLOCK) then
+
             Q <= D;
---        end if;
---    end process;
+
 end BEHAVIOR;

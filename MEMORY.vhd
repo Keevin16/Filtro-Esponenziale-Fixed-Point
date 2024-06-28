@@ -21,21 +21,23 @@ architecture behavior of MEMORY is
     end component;
     
 begin
-    process(CLOCK, RESET) begin
-        if RESET = '1' then
-            FF_D <= (others => '0');
-        elsif rising_edge(CLOCK) then
-            FF_D <= Y;     
-        end if;
-    end process;
-    
-    FFs: for I in 0 to 31 generate
+   FFs: for I in 0 to 31 generate
         FF_D_Instance: FLIP_FLOP_D
             port map(
                 D => FF_D(I),
                 CLOCK => CLOCK,
                 Q => Q(I)
             );
-    end generate;
+    end generate;   
+	process(CLOCK, RESET) begin
+        
+		  if RESET = '1' then
+            FF_D <= (others => '0');
+		 
+		  elsif rising_edge(CLOCK) then
+            FF_D <= Y;     
+        end if;
+    end process;
+   
     
 end behavior;
