@@ -7,8 +7,8 @@ entity C2AndShift is
 		WIDTH:Integer :=32
 	);
 	port(
-		Y_CSA		: in  std_logic_vector (WIDTH-1 downto 0);
-		K			: in 	std_logic_vector (2 downto 0);
+		Y_CSA			: in  std_logic_vector (WIDTH-1 downto 0);
+		K				: in 	std_logic_vector (2 downto 0);
 		Z_CSA			: out std_logic_vector (WIDTH-1 downto 0)
    );
 end C2AndShift;

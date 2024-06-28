@@ -7,22 +7,24 @@ entity FiltroEsponenzialeFixedPoint is
 		WIDTH:Integer :=32
 	);
 	port(
-		X		: in  std_logic_vector (WIDTH-1 downto 0);
-		K		: in  std_logic_vector (WIDTH-1 downto 0);
-		CLOCK	: in 	std_logic;
-		INIT	: in 	std_logic;
-		Y		: out std_logic_vector (WIDTH-1 downto 0)
+		X				: in  std_logic_vector (WIDTH-1 downto 0);
+		K				: in  std_logic_vector (2 downto 0);
+		CLOCK			: in 	std_logic;
+		INIT			: in 	std_logic;
+--		VALID_OUT   : out std_logic;
+		Y				: out std_logic_vector (WIDTH-1 downto 0)
 	);
 end FiltroEsponenzialeFixedPoint;
 
 architecture RCL of FiltroEsponenzialeFixedPoint is
 
 	signal COMMUNICATION_X 		: std_logic_vector(WIDTH-1 downto 0);
-	signal COMMUNICATION_K		: std_logic_vector(WIDTH-1 downto 0);
+	signal COMMUNICATION_K		: std_logic_vector(2 downto 0);
 	signal COMMUNICATION_OUT1	: std_logic_vector(WIDTH-1 downto 0);
-	signal COMMUNICATION_OUT2	: std_logic_vector(WIDTH-1 downto 0);
-	signal COMMUNICATION_C2		: std_logic_vector(WIDTH-1 downto 0);
+	signal COMMUNICATION_C2_OUT: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_CSA	: std_logic_vector(WIDTH-1 downto 0);
+	signal COMMUNICATION_C2_IN : std_logic_vector(WIDTH-1 downto 0);
+--	signal RESET_ALL : std_logic;
 	
 	component C2AndShift is
 		generic(
@@ -67,6 +69,9 @@ architecture RCL of FiltroEsponenzialeFixedPoint is
 	
 begin
 
+COMMUNICATION_C2_IN	<= COMMUNICATION_CSA;
+COMMUNICATION_OUT1	<= COMMUNICATION_CSA;
+
 	ShiftX_Istance	:	HoldAndShift_X
 			generic map (
 				WIDTH => WIDTH
@@ -87,13 +92,12 @@ begin
 			WIDTH	=> WIDTH
 		)
 		port map(
-			Y_CSA				=>	COMMUNICATION_OUT1,
+			Y_CSA				=>	COMMUNICATION_C2_IN,
 			K					=>	COMMUNICATION_K,
-			Z_CSA				=>	COMMUNICATION_C2
+			Z_CSA				=>	COMMUNICATION_C2_OUT
 		);
+
 	
-	COMMUNICATION_OUT1	<= COMMUNICATION_CSA;
-		
 	AdderIstance: Adder
 		generic map(
 			WIDTH	=> WIDTH
@@ -101,13 +105,25 @@ begin
 		port map(
 			X					=> COMMUNICATION_X,
 			Y					=>	COMMUNICATION_OUT1,
-			Y_SHIFTED		=>	COMMUNICATION_C2,
+			Y_SHIFTED		=>	COMMUNICATION_C2_OUT,
+			
 			Y_CSA				=> COMMUNICATION_CSA,
-
 			CLOCK 			=> CLOCK,
 			RESET				=> INIT
 		);
 		
-	Y						<= COMMUNICATION_CSA;
+	Y							<= COMMUNICATION_CSA;
+	
+--	VALID_PROCESS: process(CLOCK)
+--    begin
+--        if rising_edge(CLOCK) then
+--            if INIT = '0' then
+--                VALID_OUT <= '1';
+--					 RESET_ALL <= '0';
+--            else
+--                VALID_OUT <= '0';
+--					 RESET_ALL <= '1';
+--            end if;
+--        end if;
+--    end process VALID_PROCESS;
 end RCL;
-

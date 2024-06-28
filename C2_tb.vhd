@@ -44,6 +44,11 @@ begin
 	   Y_TEST <= "01011010110011111101100010010111";
       wait for 10 ns;
       assert (Z_TEST= "10100101001100000010011101101001") report "Test 3 failed" severity error;
+		
+		Y_TEST <= "00000000000000000000000000000000";
+      wait for 10 ns;
+      assert (Z_TEST= "00000000000000000000000000000000") report "Test 3 failed" severity error;
+		
       wait;
    end process;
 
