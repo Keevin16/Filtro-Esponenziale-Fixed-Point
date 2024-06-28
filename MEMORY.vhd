@@ -3,15 +3,18 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity MEMORY is
-    port (
+	generic(
+		WIDTH : Integer :=32
+	);
+   port (
         CLOCK, RESET : in std_logic;
-        Y : in std_logic_vector(31 downto 0);
-        Q : out std_logic_vector(31 downto 0)
-    );
+        Y : in std_logic_vector(WIDTH-1 downto 0);
+        Q : out std_logic_vector(WIDTH-1 downto 0)
+   );
 end MEMORY;
 
 architecture behavior of MEMORY is
-    signal FF_D:std_logic_vector(31 downto 0);
+    signal FF_D:std_logic_vector(WIDTH-1 downto 0);
     
     component FLIP_FLOP_D
         port (
@@ -21,7 +24,7 @@ architecture behavior of MEMORY is
     end component;
     
 begin
-   FFs: for I in 0 to 31 generate
+   FFs: for I in 0 to WIDTH-1 generate
         FF_D_Instance: FLIP_FLOP_D
             port map(
                 D => FF_D(I),
