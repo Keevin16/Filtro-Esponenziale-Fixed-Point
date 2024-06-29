@@ -7,8 +7,8 @@ entity C2 is
 		WIDTH:Integer :=32
 	);
 	port(
-		Y: in std_logic_vector	(WIDTH - 1 downto 0);
-		Z: out std_logic_vector (WIDTH - 1 downto 0)
+		Y		: in std_logic_vector	(WIDTH - 1 downto 0);
+		Z		: out std_logic_vector (WIDTH - 1 downto 0)
 	);
 end C2;
 

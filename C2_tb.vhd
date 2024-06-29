@@ -11,8 +11,9 @@ architecture behavior of C2_tb is
  
     component C2
     port(
-         Y : in  std_logic_vector(31 downto 0);
-         Z : out  std_logic_vector(31 downto 0)
+         Y 				: in  std_logic_vector(31 downto 0);
+         Z 				: out  std_logic_vector(31 downto 0);
+			MSB	: out std_logic
         );
     end component;
     
@@ -23,12 +24,14 @@ architecture behavior of C2_tb is
  	--Outputs
    signal Z_TEST : std_logic_vector(31 downto 0);
 
+	signal SEGNO_TEST: std_logic;
  
 begin
  
 	uut: C2 port map(
           Y => Y_TEST,
-          Z => Z_TEST
+          Z => Z_TEST,
+			 MSB => SEGNO_TEST
         );
 
    stim_proc: process
@@ -36,19 +39,27 @@ begin
       Y_TEST <= "01010101010101010101010101010101";
       wait for 10 ns;
       assert (Z_TEST= "10101010101010101010101010101011") report "Test 1 failed" severity error;
+		assert (SEGNO_TEST= '1') report "test segno failed" severity error;
 
 	   Y_TEST <= "10000000000010000000000000000000";
       wait for 10 ns;
       assert (Z_TEST= "01111111111110000000000000000000") report "Test 2 failed" severity error;
+		assert (SEGNO_TEST= '0') report "test segno failed" severity error;
 
 	   Y_TEST <= "01011010110011111101100010010111";
       wait for 10 ns;
       assert (Z_TEST= "10100101001100000010011101101001") report "Test 3 failed" severity error;
+		assert (SEGNO_TEST= '1') report "test segno failed" severity error;
 		
 		Y_TEST <= "00000000000000000000000000000000";
       wait for 10 ns;
-      assert (Z_TEST= "00000000000000000000000000000000") report "Test 3 failed" severity error;
+      assert (Z_TEST= "00000000000000000000000000000000") report "Test 4 failed" severity error;
+		assert (SEGNO_TEST= '0') report "test segno failed" severity error;
 		
+		Y_TEST <= "11111111111111111111111111111111";
+		wait for 10 ns; 
+		assert(Z_TEST = "00000000000000000000000000000001")report "Test 5 failed" severity error;
+		assert (SEGNO_TEST= '1') report "test segno failed" severity error;
       wait;
    end process;
 

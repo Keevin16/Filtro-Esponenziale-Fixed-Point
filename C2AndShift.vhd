@@ -18,8 +18,8 @@ architecture RCL of C2AndShift is
 	
 	component C2 is 
 		port(
-			Y: in	 std_logic_vector	(WIDTH-1 downto 0);
-			Z: out std_logic_vector (WIDTH-1 downto 0)
+			Y		: in	 std_logic_vector	(WIDTH-1 downto 0);
+			Z		: out std_logic_vector (WIDTH-1 downto 0)
 		);
 	end component;
 
@@ -30,12 +30,12 @@ architecture RCL of C2AndShift is
 			Y  : out std_logic_vector	(WIDTH-1 downto 0)
 		);
 	end component;
-
+-- -30 È 00010 --shiftato di uno fa -15 che è 0001
 begin
 	C2Istance: C2
 		port map(
-			Y 			=>	Y_CSA,
-			Z			=>	COMMUNICATION 
+			Y 					=>	Y_CSA,
+			Z					=>	COMMUNICATION
 		);
 	
 	MuxIstance: MULTIPLEXER_SX
@@ -43,7 +43,6 @@ begin
 			X			=>	COMMUNICATION,
 			K			=>	K,
 			Y			=>	Z_CSA
-		);		
-
+		);	
+	
 end RCL;
-

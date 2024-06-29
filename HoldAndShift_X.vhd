@@ -70,5 +70,6 @@ architecture RCL of HoldAndShift_X is
 				K		=>	COMMUNICATION_K,
 				Y		=>	X_SHIFTED
 			);
+			
 		K_SH <= COMMUNICATION_K;
 end RCL;

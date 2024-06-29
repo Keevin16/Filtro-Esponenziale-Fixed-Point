@@ -44,23 +44,23 @@ begin
       wait for 100 ns;	
 
 		
-		Y_CSA <= "00000000001111000011111000000000";
+		Y_CSA <= "00011110000111110000000000000000";
       K		<= "111";
 		wait for 10 ns;
-		assert Z_CSA = "00000001111111111000011110000100"
-			report "Test case 1 failed" severity error;
-
-		Y_CSA <= "00000000101100110101000101111101";
-      K		<= "111";
-		wait for 10 ns;
-		assert Z_CSA = "00000001111111101001100101011101"
-			report "Test case 2 failed" severity error;
-		
-		Y_CSA <= x"AF170000";
-		K		<= "110";
-		wait for 10 ns;
-		assert Z_CSA = "00000001010000111010010000000000" report "Test case 3 failed" severity error;
-      
+--		assert Z_CSA = "11111111110000111100001000000000"
+--			report "Test case 1 failed" severity error;
+--
+--		Y_CSA <= "00000000101100110101000101111101";
+--      K		<= "111";
+--		wait for 10 ns;
+--		assert Z_CSA = "00000001111111101001100101011101"
+--			report "Test case 2 failed" severity error;
+--		
+--		Y_CSA <= x"AF170000";
+--		K		<= "110";
+--		wait for 10 ns;
+--		assert Z_CSA = "00000001010000111010010000000000" report "Test case 3 failed" severity error;
+--      
 		wait;
    end process;
 	

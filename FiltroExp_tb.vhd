@@ -64,7 +64,7 @@ BEGIN
 		
 		INIT 	<='0';
 		wait for CLOCK_period;
-		
+
 		X		<= x"1E1F0000";
 		K		<= "111";
 	

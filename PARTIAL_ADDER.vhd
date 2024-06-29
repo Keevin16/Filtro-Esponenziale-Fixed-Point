@@ -14,12 +14,14 @@ end PA;
 
 architecture RCL of PA is
     signal CARRY: std_logic_vector(WIDTH-1 downto 0);
-    component HA is 
+    signal MSB	 : std_logic;
+	 
+	 component HA is 
 		 port(
 			X  	: in  std_logic;
 			Y		: in  std_logic;
 			SUM   : out std_logic;
-			COUT 	: out std_logic
+			COUT  : out std_logic
 		 );
     end component;
 
