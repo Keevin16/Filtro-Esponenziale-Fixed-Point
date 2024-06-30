@@ -14,7 +14,6 @@ architecture behavior of FiltroExp_tb is
          K 			: in  std_logic_vector(2 downto 0);
          CLOCK 	: in  std_logic;
          INIT 		: in  std_logic;
---			VALID_OUT: out std_logic;
          Y 			: out  std_logic_vector(31 downto 0)
     );
 	end component;
@@ -32,9 +31,9 @@ architecture behavior of FiltroExp_tb is
    -- Clock period definitions
    constant CLOCK_period : time := 40 ns;
  
-BEGIN
+begin
  
-   uut: FiltroEsponenzialeFixedPoint PORT MAP (
+   uut: FiltroEsponenzialeFixedPoint port map (
           X => X,
           K => K,
           CLOCK => CLOCK,
@@ -68,18 +67,16 @@ BEGIN
 		X		<= x"1E1F0000";
 		K		<= "111";
 	
---		wait for CLOCK_period;
---			assert Y = X"00000000011110000000001110000100" report "Test case 1 failed" severity error;
---		
---		wait for CLOCK_period;
---			assert Y = "00000000101100110101000101111101" report "Test case 2 failed" severity error;
-		 	wait for 300 ns;
-			INIT	<= '1';
-			wait for 100 ns;
+		 	wait for CLOCK_period*5 ;
 			
-			INIT <='0';
+		INIT	<= '1';
+		wait for CLOCK_period;
 		
-	
+		INIT <= '0';
+		X <= x"1F900000";  
+		K <= "101";	
+			wait for CLOCK_period*8;
+			INIT <='1';
  
       wait;
    end process;

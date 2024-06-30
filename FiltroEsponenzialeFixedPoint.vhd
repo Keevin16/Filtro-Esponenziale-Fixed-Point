@@ -11,7 +11,6 @@ entity FiltroEsponenzialeFixedPoint is
 		K				: in  std_logic_vector (2 downto 0);
 		CLOCK			: in 	std_logic;
 		INIT			: in 	std_logic;
---		VALID_OUT   : out std_logic;
 		Y				: out std_logic_vector (WIDTH-1 downto 0)
 	);
 end FiltroEsponenzialeFixedPoint;
@@ -24,7 +23,7 @@ architecture RCL of FiltroEsponenzialeFixedPoint is
 	signal COMMUNICATION_C2_OUT: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_CSA	: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_C2_IN : std_logic_vector(WIDTH-1 downto 0);
---	signal RESET_ALL : std_logic;
+	signal RESET_ALL : std_logic;
 	
 	component C2AndShift is
 		generic(
@@ -114,15 +113,13 @@ COMMUNICATION_OUT1	<= COMMUNICATION_CSA;
 		
 	Y							<= COMMUNICATION_CSA;
 	
---	VALID_PROCESS: process(CLOCK)
+--	SYN: process(CLOCK)
 --    begin
 --        if rising_edge(CLOCK) then
 --            if INIT = '0' then
---                VALID_OUT <= '1';
 --					 RESET_ALL <= '0';
 --            else
---                VALID_OUT <= '0';
---					 RESET_ALL <= '1';
+-- 					 RESET_ALL <= '1';
 --            end if;
 --        end if;
 --    end process VALID_PROCESS;

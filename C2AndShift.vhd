@@ -32,17 +32,18 @@ architecture RCL of C2AndShift is
 	end component;
 -- -30 È 00010 --shiftato di uno fa -15 che è 0001
 begin
-	C2Istance: C2
-		port map(
-			Y 					=>	Y_CSA,
-			Z					=>	COMMUNICATION
-		);
-	
+
 	MuxIstance: MULTIPLEXER_SX
 		port map(
-			X			=>	COMMUNICATION,
+			X			=>	Y_CSA,
 			K			=>	K,
-			Y			=>	Z_CSA
+			Y			=>	COMMUNICATION
 		);	
+		
+	C2Istance: C2
+		port map(
+			Y 					=>	COMMUNICATION,
+			Z					=>	Z_CSA
+		);
 	
 end RCL;
