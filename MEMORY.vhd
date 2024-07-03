@@ -32,6 +32,7 @@ begin
                 Q => Q(I)
             );
     end generate;   
+	 
 	process(CLOCK, RESET) begin
         
 		  if RESET = '1' then
@@ -40,7 +41,7 @@ begin
 		  elsif rising_edge(CLOCK) then
             FF_D <= Y;     
         end if;
-    end process;
+   end process;
    
     
 end behavior;

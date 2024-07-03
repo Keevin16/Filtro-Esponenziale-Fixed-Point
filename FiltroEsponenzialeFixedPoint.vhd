@@ -23,8 +23,8 @@ architecture RCL of FiltroEsponenzialeFixedPoint is
 	signal COMMUNICATION_C2_OUT: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_CSA	: std_logic_vector(WIDTH-1 downto 0);
 	signal COMMUNICATION_C2_IN : std_logic_vector(WIDTH-1 downto 0);
-	signal RESET_ALL : std_logic;
 	
+
 	component C2AndShift is
 		generic(
 			WIDTH:Integer :=32
@@ -35,6 +35,7 @@ architecture RCL of FiltroEsponenzialeFixedPoint is
 			Z_CSA		: out std_logic_vector (WIDTH-1 downto 0)
 		); 
 	end component;
+	
 	
 	component HoldAndShift_X is
 		generic(
@@ -70,6 +71,8 @@ begin
 
 COMMUNICATION_C2_IN	<= COMMUNICATION_CSA;
 COMMUNICATION_OUT1	<= COMMUNICATION_CSA;
+
+	
 
 	ShiftX_Istance	:	HoldAndShift_X
 			generic map (
@@ -113,14 +116,5 @@ COMMUNICATION_OUT1	<= COMMUNICATION_CSA;
 		
 	Y							<= COMMUNICATION_CSA;
 	
---	SYN: process(CLOCK)
---    begin
---        if rising_edge(CLOCK) then
---            if INIT = '0' then
---					 RESET_ALL <= '0';
---            else
--- 					 RESET_ALL <= '1';
---            end if;
---        end if;
---    end process VALID_PROCESS;
+
 end RCL;

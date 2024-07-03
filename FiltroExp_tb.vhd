@@ -57,26 +57,25 @@ begin
    begin		
 		INIT <='1';
 		wait for CLOCK_period;
-			assert Y = "00000000000000000000000000000000" report "Test case 0 failed" severity error;
-			
-		
+			assert Y = "00000000000000000000000000000000" report "Test case 0 failed" severity error;	
 		
 		INIT 	<='0';
 		wait for CLOCK_period;
 
-		X		<= x"1E1F0000";
-		K		<= "111";
+		X		<= x"1f680000";--	8040.00
+		K		<= "101";
 	
-		 	wait for CLOCK_period*5 ;
-			
+		--wait for CLOCK_period*7 ;
+				wait for 432 ns ;
+		
 		INIT	<= '1';
 		wait for CLOCK_period;
 		
 		INIT <= '0';
-		X <= x"1F900000";  
-		K <= "101";	
-			wait for CLOCK_period*8;
-			INIT <='1';
+		X <= x"1e900000";-- 7824.00
+		K <= "111";	
+			--wait for CLOCK_period*8;
+		wait for 170 ns ;
  
       wait;
    end process;

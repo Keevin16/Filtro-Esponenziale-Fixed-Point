@@ -15,8 +15,7 @@ signal MSB : std_logic;
 begin 
 	MSB <= X(31);
 
-    process(X, K, MSB) 
-    begin
+    process(X, K, MSB) begin
         case K is
             when "000" =>		Y <=  X;
             when "001" =>		Y <=  MSB & 													X(31 downto 1);
