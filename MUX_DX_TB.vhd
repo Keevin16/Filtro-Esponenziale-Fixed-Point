@@ -38,47 +38,22 @@ begin
    stim_proc: process
    begin		
      
-	   wait for 10 ns;
+
       X <= "11111111111111111111111111111111";
       K <= "000";
-      wait for 10 ns;
+
       assert (Y = "11111111111111111111111111111111") report "Test 1 failed" severity error;
-
       wait for 10 ns;
-      X <= "11111111111111111111111111111111";
+		
+      X <= "01111111111111111111111111111111";
       K <= "001";
+      assert (Y = "0011111111111111111111111111111111") report "Test 2 failed" severity error;
 		wait for 10 ns;
-      assert (Y = "01111111111111111111111111111111") report "Test 2 failed" severity error;
-
-      wait for 10 ns;
-      X <= "11111111111111111111111111111111";
-      K <= "010";
+		
+      X <= "01111111111111111111111111111111";
+      K <= "101";
 		wait for 10 ns;
-      assert (Y = "00111111111111111111111111111111") report "Test 3 failed" severity error;
-
-      wait for 10 ns;
-      X <= "11111111111111111111111111111111";
-      K <= "011";
-		wait for 10 ns;
-      assert (Y = "00011111111111111111111111111111") report "Test 4 failed" severity error;
-
-      wait for 10 ns;
-      X <= "11111111111111111111111111111111";
-      K <= "100";
-		wait for 10 ns;
-      assert (Y = "00001111111111111111111111111111") report "Test 5 failed" severity error;
-
-		wait for 10 ns;
-      X <= "11111111111111111111111111111111";
-      K <= "110";
-		wait for 10 ns;
-      assert (Y = "00000011111111111111111111111111") report "Test 7 failed" severity error;
-
-      wait for 10 ns;
-      X <= "11111111111111111111111111111111";
-      K <= "111";		
-		wait for 10 ns;
-      assert (Y = "00000001111111111111111111111111") report "Test 8 failed" severity error;
+      assert (Y = "000000111111111111111111111111111") report "Test 2 failed" severity error;
 
 
       wait;

@@ -30,7 +30,7 @@ architecture RCL of C2AndShift is
 			Y  : out std_logic_vector	(WIDTH-1 downto 0)
 		);
 	end component;
--- -30 È 00010 --shiftato di uno fa -15 che è 0001
+
 begin
 
 	MuxIstance: MULTIPLEXER_SX
